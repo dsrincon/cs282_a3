@@ -131,7 +131,7 @@ class MultiHeadProjection(Model):
         # Transpose back compared to the split, so that the outer dimensions are batch_size and sequence_length again
         tensor = tf.transpose(tensor,perm=[0,2,1,3])
         batch_size, tensorlen, feature_size = tf.shape(tensor)[0], tf.shape(tensor)[1],tf.shape(tensor)[3]
-        #feature_size = tensor.shape.as_list()[-1]
+        feature_size = tensor.shape.as_list()[-1]
         #feature_size = tensor.shape.as_list()
         new_feature_size = feature_size*self.n_heads # What is the new feature size, if we combine all the heads
         tensor = tf.reshape(tensor,[batch_size,tensorlen,new_feature_size]) # Reshape the Tensor to remove the heads dimension and come back to a Rank-3 tensor
@@ -182,5 +182,7 @@ class MultiHeadAttention(Model):
         v = self.value_layer(memory_antecedent)
 
         attention_output = self.attention_layer((q, k, v), mask=mask)
+        #tf.reshape(attention_output,tf.shape(attention_output))
         output = self.output_layer(attention_output)
+        #return attention_output
         return output
