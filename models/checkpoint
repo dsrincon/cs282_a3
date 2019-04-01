@@ -1,2 +1,3 @@
-model_checkpoint_path: "final_transformer_summarization"
-all_model_checkpoint_paths: "final_transformer_summarization"
+model_checkpoint_path: "improve3_transformer_summarization"
+all_model_checkpoint_paths: "improve2_transformer_summarization"
+all_model_checkpoint_paths: "improve3_transformer_summarization"
